@@ -1,0 +1,2 @@
+rootProject.name = 'kafka-payment-lab'
+include 'contracts', 'payment-api', 'payment-processor', 'audit-service'

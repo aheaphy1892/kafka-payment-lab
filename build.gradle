@@ -1,0 +1,21 @@
+plugins {
+    id 'org.springframework.boot' version '4.0.10' apply false
+}
+
+allprojects {
+    group = 'dev.portfolio.payments'
+    version = '0.2.0'
+    repositories { mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
+    dependencies {
+        implementation platform('org.springframework.boot:spring-boot-dependencies:4.0.10')
+        testImplementation platform('org.springframework.boot:spring-boot-dependencies:4.0.10')
+    }
+    tasks.withType(Test).configureEach { useJUnitPlatform() }
+}
