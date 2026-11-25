@@ -1,0 +1,25 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: audit-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/payment_audit}
+    username: ${DB_USER:payments}
+    password: ${DB_PASSWORD:payments}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: payment-audit
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: record
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

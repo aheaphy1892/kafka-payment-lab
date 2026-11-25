@@ -1,0 +1,1 @@
+CREATE TABLE audit_log (event_id uuid PRIMARY KEY, payment_id uuid NOT NULL, amount numeric(19,2) NOT NULL, currency varchar(3) NOT NULL, partition_id int NOT NULL, offset_id bigint NOT NULL, created_at timestamptz NOT NULL DEFAULT now());
