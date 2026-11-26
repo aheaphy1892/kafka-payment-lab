@@ -1,0 +1,20 @@
+# Git & CI
+.git
+.gitignore
+.github
+
+# Gradle build outputs & local caches
+.gradle/
+build/
+**/build/
+
+# IDE & OS files
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Docker files & logs
+Dockerfile*
+docker-compose*
+*.log

@@ -1,4 +1,5 @@
 plugins { id 'org.springframework.boot' }
+
 dependencies {
     implementation project(':contracts')
     implementation 'org.springframework.boot:spring-boot-starter-kafka'
@@ -14,4 +15,8 @@ dependencies {
     testImplementation 'org.testcontainers:testcontainers-postgresql'
     testImplementation 'org.testcontainers:testcontainers-kafka'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+bootJar {
+    archiveFileName = 'payment-processor.jar'
 }
