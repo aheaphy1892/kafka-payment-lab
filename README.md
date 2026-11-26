@@ -67,6 +67,26 @@ gradle test
 
 Testcontainers requires a running Docker daemon. Tests include payment/outbox atomicity, filtered/sorted pagination and idempotent processing when an event is delivered twice. A *true* broker restart/offset replay end-to-end test remains future work.
 
+## Docker Builds
+
+Example docker build commands passing in APP_MODULE as build arg 
+
+```bash
+docker build --build-arg APP_MODULE=payment-api -t payment-api:latest .
+docker build --build-arg APP_MODULE=payment-processor -t payment-processor:latest .
+docker build --build-arg APP_MODULE=audit-service -t audit-service:latest .
+```
+
+## Docker Run
+
+Example docker run commands passing in postgres DB_URL and netwotk
+
+```bash
+docker run --name payment-api -e "DB_URL=jdbc:postgresql://postgres:5432/payment_api" --network kafka-payment-lab_app-db payment-api:latest
+docker run --name payment-processor -e "DB_URL=jdbc:postgresql://postgres:5432/payment_processor" --network kafka-payment-lab_app-db payment-processor:latest
+docker run --name audit-service -e "DB_URL=jdbc:postgresql://postgres:5432/payment_audit" --network kafka-payment-lab_app-db audit-service:latest
+```
+
 ## Delivery semantics
 
 Payment and outbox insertion occur in the same PostgreSQL transaction. The relay publishes an outbox event and then marks it published. A crash between those steps can cause duplicate Kafka publication. Each consumer records the event ID and applies business changes in one local DB transaction, so replay of the same event ID is harmless. Kafka offset commits are **not** atomic with the PostgreSQL commit.
