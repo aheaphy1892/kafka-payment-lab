@@ -3,6 +3,7 @@ package dev.portfolio.payments.payment.api;
 import dev.portfolio.payments.contracts.PaymentEvents;
 
 import dev.portfolio.payments.payment.api.PaymentDtos.PaymentResponse;
+import dev.portfolio.payments.payment.api.repository.PaymentOutboxRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
