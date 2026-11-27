@@ -54,13 +54,16 @@ docker compose logs -f postgres kafka kafka-init payment-api payment-processor a
 | Audit Service | `http://localhost:8082` | Audit application health/metrics |
 | PostgreSQL | `localhost:5432` | Three application databases in one local server |
 | Kafka | `localhost:9092` | Host-accessible Kafka listener |
+| Prometheus | `http://localhost:9090` | Optional metrics scraper |
+| Grafana | `http://localhost:3000` | Optional dashboards |
 
 Inside the Compose network, applications connect to Kafka at `kafka:29092`. Applications run directly on your host should use `localhost:9092` and `localhost:5432` instead.
 
-Each Spring Boot application exposes Actuator health endpoints on its configured HTTP port:
+Each Spring Boot application exposes Actuator health and Prometheus endpoints on its configured HTTP port:
 
 - `GET /actuator/health`
 - `GET /actuator/health/readiness`
+- `GET /actuator/prometheus`
 
 For example, the Payment API health endpoint is `http://localhost:8080/actuator/health`.
 
@@ -79,6 +82,16 @@ curl -i http://localhost:8080/payments/<PAYMENT_ID>
 ```
 
 The initial state is expected to be `PENDING`; after the processor handles the request and the API consumes the result event, the simulated decision is reflected in the payment state. The admin search endpoint is `GET /admin/payments`; when JWT security is enabled it requires the `payments.admin` scope.
+
+## Optional Prometheus and Grafana
+
+Start the observability profile after (or alongside) the application stack:
+
+```bash
+docker compose --profile observability up --build -d
+```
+
+Open Prometheus at `http://localhost:9090` and Grafana at `http://localhost:3000`. The sample Grafana credentials are `admin` / `admin`; change them before exposing Grafana beyond your local machine. The initial dashboard covers the metrics provisioned by this project. Kafka consumer-group lag is not included in this first iteration.
 
 ## Inspect Kafka topics and consumer groups
 

@@ -1,0 +1,14 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "panels": [
+    {"type":"timeseries","title":"Pending outbox rows","gridPos":{"h":8,"w":12,"x":0,"y":0},"targets":[{"expr":"outbox_pending","legendFormat":"{{application}}"}]},
+    {"type":"timeseries","title":"Oldest pending outbox age (seconds)","gridPos":{"h":8,"w":12,"x":12,"y":0},"targets":[{"expr":"outbox_oldest_pending_age_seconds","legendFormat":"{{application}}"}]},
+    {"type":"timeseries","title":"Outbox publish failures","gridPos":{"h":8,"w":12,"x":0,"y":8},"targets":[{"expr":"rate(outbox_publish_failure_total[5m])","legendFormat":"{{application}}"}]},
+    {"type":"timeseries","title":"Processed payment events","gridPos":{"h":8,"w":12,"x":12,"y":8},"targets":[{"expr":"rate(payment_consumer_processed_total[5m])","legendFormat":"{{application}}"}]}
+  ],
+  "schemaVersion": 39,
+  "title": "Kafka Payment Lab",
+  "uid": "kafka-payment-lab",
+  "version": 1
+}

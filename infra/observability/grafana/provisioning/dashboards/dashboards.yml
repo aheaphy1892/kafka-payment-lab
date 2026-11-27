@@ -1,0 +1,9 @@
+apiVersion: 1
+providers:
+  - name: Payment lab
+    orgId: 1
+    folder: Payment lab
+    type: file
+    disableDeletion: true
+    options:
+      path: /var/lib/grafana/dashboards

@@ -57,6 +57,23 @@ services:
     labels:
       org.springframework.boot.ignore: "true"
 
+  prometheus:
+    image: prom/prometheus:v3.2.1
+    profiles: [observability]
+    ports: ["9090:9090"]
+    volumes:
+      - ./infra/observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on: [payment-api, payment-processor, audit-service]
+
+  grafana:
+    image: grafana/grafana:11.6.0
+    profiles: [observability]
+    ports: ["3000:3000"]
+    volumes:
+      - ./infra/observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/observability/grafana/payment-lab-dashboard.json:/var/lib/grafana/dashboards/payment-lab-dashboard.json:ro
+    depends_on: [prometheus]
+
   payment-api:
     build:
       context: .
