@@ -1,4 +1,4 @@
-package dev.portfolio.payments.payment.api;
+package dev.portfolio.payments.payment.api.enums;
 
 public enum PaymentStatus {
   PENDING,

@@ -1,9 +1,15 @@
-package dev.portfolio.payments.payment.api;
+package dev.portfolio.payments.payment.api.services;
 
 import dev.portfolio.payments.contracts.PaymentEvents;
 
-import dev.portfolio.payments.payment.api.PaymentDtos.PaymentResponse;
+import dev.portfolio.payments.payment.api.repository.specifications.PaymentSpecifications;
+import dev.portfolio.payments.payment.api.dto.PaymentDtos;
+import dev.portfolio.payments.payment.api.dto.PaymentDtos.PaymentResponse;
+import dev.portfolio.payments.payment.api.entities.Payment;
+import dev.portfolio.payments.payment.api.enums.PaymentStatus;
 import dev.portfolio.payments.payment.api.repository.PaymentOutboxRepository;
+import dev.portfolio.payments.payment.api.repository.PaymentRepository;
+import dev.portfolio.payments.payment.api.repository.ProcessedEventRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

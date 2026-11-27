@@ -1,6 +1,6 @@
-package dev.portfolio.payments.payment.processor;
+package dev.portfolio.payments.payment.api.entities;
 
-import dev.portfolio.payments.payment.processor.repository.PaymentOutBoxRepository;
+import dev.portfolio.payments.payment.api.repository.PaymentOutboxRepository;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -18,14 +18,14 @@ public class OutboxRelay {
     private static final org.slf4j.Logger log =
         org.slf4j.LoggerFactory.getLogger(OutboxRelay.class);
 
-    private final PaymentOutBoxRepository outboxRepository;
+    private final PaymentOutboxRepository outboxRepository;
     private final KafkaTemplate<String, String> kafka;
     private final MeterRegistry metrics;
     private final int batchSize;
     private final Duration leaseDuration;
 
     public OutboxRelay(
-        PaymentOutBoxRepository outboxRepository,
+        PaymentOutboxRepository outboxRepository,
         KafkaTemplate<String, String> kafka,
         MeterRegistry metrics,
         @Value("${app.outbox.batch-size:50}") int batchSize,
@@ -38,9 +38,9 @@ public class OutboxRelay {
         this.leaseDuration = Duration.ofSeconds(leaseSeconds);
 
         metrics.gauge("outbox.pending", outboxRepository,
-            PaymentOutBoxRepository::countPending);
+            PaymentOutboxRepository::countPending);
         metrics.gauge("outbox.oldest.pending.age", outboxRepository,
-            PaymentOutBoxRepository::oldestPendingAgeSeconds);
+            PaymentOutboxRepository::oldestPendingAgeSeconds);
     }
 
     /**
@@ -61,6 +61,8 @@ public class OutboxRelay {
 
                 int updated = outboxRepository.markPublished(claim.id(), claimToken);
                 if (updated != 1) {
+                    // Kafka may already have accepted the event. Do not mark a row
+                    // owned by another relay; downstream idempotency handles replay.
                     metrics.counter("outbox.publish.mark-failed").increment();
                     log.warn("Kafka accepted outbox event {}, but its claim was no longer owned",
                         claim.id());

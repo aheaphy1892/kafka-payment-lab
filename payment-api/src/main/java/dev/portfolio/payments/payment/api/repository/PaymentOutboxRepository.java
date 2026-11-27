@@ -1,6 +1,6 @@
 package dev.portfolio.payments.payment.api.repository;
 
-import dev.portfolio.payments.payment.api.OutboxClaim;
+import dev.portfolio.payments.payment.api.entities.OutboxClaim;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

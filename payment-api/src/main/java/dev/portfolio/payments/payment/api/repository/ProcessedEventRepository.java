@@ -1,4 +1,4 @@
-package dev.portfolio.payments.payment.api;
+package dev.portfolio.payments.payment.api.repository;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

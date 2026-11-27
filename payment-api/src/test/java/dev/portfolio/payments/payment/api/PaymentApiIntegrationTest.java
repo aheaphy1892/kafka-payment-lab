@@ -1,5 +1,8 @@
 package dev.portfolio.payments.payment.api;
 
+import dev.portfolio.payments.payment.api.dto.PaymentDtos;
+import dev.portfolio.payments.payment.api.enums.PaymentStatus;
+import dev.portfolio.payments.payment.api.services.PaymentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +29,8 @@ class PaymentApiIntegrationTest {
         registry.add("spring.datasource.password", postgres::getPassword);
         registry.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
     }
-    @Autowired PaymentService service;
+    @Autowired
+    PaymentService service;
     @Autowired JdbcTemplate jdbc;
 
     @Test void createsPaymentAndOutboxInSameTransaction() throws Exception {

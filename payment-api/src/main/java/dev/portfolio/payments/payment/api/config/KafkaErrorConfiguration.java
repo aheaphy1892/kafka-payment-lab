@@ -1,4 +1,4 @@
-package dev.portfolio.payments.payment.api;
+package dev.portfolio.payments.payment.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

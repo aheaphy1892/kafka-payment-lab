@@ -1,4 +1,4 @@
-package dev.portfolio.payments.payment.processor;
+package dev.portfolio.payments.payment.processor.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

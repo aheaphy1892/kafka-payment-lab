@@ -1,7 +1,9 @@
-package dev.portfolio.payments.payment.api;
+package dev.portfolio.payments.payment.api.controllers;
 
 
-import dev.portfolio.payments.payment.api.PaymentDtos.PaymentResponse;
+import dev.portfolio.payments.payment.api.services.PaymentService;
+import dev.portfolio.payments.payment.api.dto.PaymentDtos.PaymentResponse;
+import dev.portfolio.payments.payment.api.enums.PaymentStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

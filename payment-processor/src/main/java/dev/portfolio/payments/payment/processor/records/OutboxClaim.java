@@ -1,4 +1,4 @@
-package dev.portfolio.payments.payment.api;
+package dev.portfolio.payments.payment.processor.records;
 
 import java.util.UUID;
 

@@ -1,5 +1,7 @@
-package dev.portfolio.payments.payment.api;
+package dev.portfolio.payments.payment.api.repository.specifications;
 
+import dev.portfolio.payments.payment.api.entities.Payment;
+import dev.portfolio.payments.payment.api.enums.PaymentStatus;
 import java.util.Locale;
 import org.springframework.data.jpa.domain.Specification;
 import java.time.Instant;

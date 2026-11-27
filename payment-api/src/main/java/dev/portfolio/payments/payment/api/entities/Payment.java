@@ -1,6 +1,7 @@
-package dev.portfolio.payments.payment.api;
+package dev.portfolio.payments.payment.api.entities;
 
 
+import dev.portfolio.payments.payment.api.enums.PaymentStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

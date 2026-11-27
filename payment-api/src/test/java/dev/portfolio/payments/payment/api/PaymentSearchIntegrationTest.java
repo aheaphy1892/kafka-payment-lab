@@ -1,5 +1,8 @@
 package dev.portfolio.payments.payment.api;
 
+import dev.portfolio.payments.payment.api.dto.PaymentDtos;
+import dev.portfolio.payments.payment.api.enums.PaymentStatus;
+import dev.portfolio.payments.payment.api.services.PaymentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,13 +30,15 @@ class PaymentSearchIntegrationTest {
         r.add("spring.kafka.bootstrap-servers",kafka::getBootstrapServers);
     }
 
-    @Autowired PaymentService service;
+    @Autowired
+    PaymentService service;
 
     @Test void filtersAndPagesPayments() {
         service.submit(new PaymentDtos.CreatePaymentRequest(new BigDecimal("12.50"),"GBP"));
         service.submit(new PaymentDtos.CreatePaymentRequest(new BigDecimal("15.00"),"EUR"));
         service.submit(new PaymentDtos.CreatePaymentRequest(new BigDecimal("20.00"),"GBP"));
-        var page=service.search(PaymentStatus.PENDING,"GBP",null,null,PageRequest.of(0,1,Sort.by("amount").descending()));
+        var page=service.search(
+            PaymentStatus.PENDING,"GBP",null,null,PageRequest.of(0,1,Sort.by("amount").descending()));
         assertThat(page.getTotalElements()).isEqualTo(2);
         assertThat(page.getContent()).hasSize(1);
         assertThat(page.getContent().getFirst().amount()).isEqualByComparingTo("20.00");

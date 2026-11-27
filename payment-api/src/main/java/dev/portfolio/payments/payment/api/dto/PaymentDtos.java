@@ -1,5 +1,7 @@
-package dev.portfolio.payments.payment.api;
+package dev.portfolio.payments.payment.api.dto;
 
+import dev.portfolio.payments.payment.api.entities.Payment;
+import dev.portfolio.payments.payment.api.enums.PaymentStatus;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;

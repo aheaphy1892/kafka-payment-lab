@@ -1,6 +1,7 @@
 package dev.portfolio.payments.payment.processor;
 
 import dev.portfolio.payments.contracts.PaymentEvents;
+import dev.portfolio.payments.payment.processor.services.PaymentProcessingService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,8 @@ class PaymentProcessorIntegrationTest {
         r.add("spring.datasource.password", postgres::getPassword);
         r.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
     }
-    @Autowired PaymentProcessingService service;
+    @Autowired
+    PaymentProcessingService service;
     @Autowired ObjectMapper mapper;
     @Autowired JdbcTemplate jdbc;
 

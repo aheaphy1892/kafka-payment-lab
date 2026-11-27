@@ -1,4 +1,4 @@
-package dev.portfolio.payments.payment.processor;
+package dev.portfolio.payments.payment.processor.repository;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
