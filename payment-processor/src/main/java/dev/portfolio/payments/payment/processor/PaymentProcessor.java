@@ -16,7 +16,11 @@ public class PaymentProcessor {
         this.service=service;this.mapper=mapper;
     }
 
-    @KafkaListener(topics=PaymentEvents.REQUESTED,groupId="payment-processing")
+    @KafkaListener(
+        id = "payment-processing-listener",
+        topics = PaymentEvents.REQUESTED,
+        groupId = "payment-processing"
+    )
     public void receive(ConsumerRecord<String,String> record) {
         service.process(mapper.readValue(record.value(),PaymentEvents.Requested.class));
     }
