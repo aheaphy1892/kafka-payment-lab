@@ -3,7 +3,10 @@ gradle/
 **/build/
 .idea/
 *.iml
-.env
 .DS_Store
 gradlew
 gradlew.bat
+
+# env files
+*.env
+!*.env.example

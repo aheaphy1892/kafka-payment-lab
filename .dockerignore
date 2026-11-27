@@ -18,3 +18,8 @@ build/
 Dockerfile*
 docker-compose*
 *.log
+
+
+# Docker env files
+*.env
+!*.env.example
