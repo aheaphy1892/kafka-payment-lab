@@ -1,4 +1,4 @@
-package dev.portfolio.payments.audit.service;
+package dev.portfolio.payments.audit.service.repositories;
 import dev.portfolio.payments.contracts.PaymentEvents;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

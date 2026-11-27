@@ -1,5 +1,6 @@
-package dev.portfolio.payments.audit.service;
+package dev.portfolio.payments.audit.service.consumers;
 
+import dev.portfolio.payments.audit.service.services.AuditService;
 import dev.portfolio.payments.contracts.PaymentEvents;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;

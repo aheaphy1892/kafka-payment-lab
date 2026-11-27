@@ -1,4 +1,5 @@
-package dev.portfolio.payments.audit.service;
+package dev.portfolio.payments.audit.service.services;
+import dev.portfolio.payments.audit.service.repositories.AuditRepository;
 import dev.portfolio.payments.contracts.PaymentEvents;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
